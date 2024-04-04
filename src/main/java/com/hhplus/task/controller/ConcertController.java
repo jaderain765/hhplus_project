@@ -47,8 +47,11 @@ public class ConcertController {
      *
      * @return
      */
-    @PutMapping("")
-    public ResponseEntity<Object> reserveConcert(@RequestBody ConcertRequestDto concertRequestDto){
+    @PutMapping("/{token}")
+    public ResponseEntity<Object> reserveConcert(
+            @PathVariable String token,
+            @RequestBody ConcertRequestDto concertRequestDto
+    ){
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 

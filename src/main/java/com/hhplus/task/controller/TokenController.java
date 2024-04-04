@@ -1,5 +1,6 @@
 package com.hhplus.task.controller;
 
+import com.hhplus.task.exception.CustomRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,9 @@ public class TokenController {
      */
     @GetMapping("/{userId}")
     public ResponseEntity<String> getToken(@PathVariable Long userId){
+
+        if(userId == null || userId < 0L) throw new CustomRuntimeException("");
+
         return new ResponseEntity<>(UUID.randomUUID().toString(), HttpStatus.OK);
     }
 }
