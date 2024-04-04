@@ -1,12 +1,14 @@
 package com.hhplus.task.controller;
 
 import com.hhplus.task.dto.ConcertRequestDto;
+import com.hhplus.task.entity.ConcertEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,23 +24,37 @@ public class ConcertController {
      *
      * 현재 있는 콘서트 목록을 볼 수 있다.
      *
-     * @param token 사용자 대기열 토큰
      * @param isALl true:모든 콘서트 목록을 가져온다. false(기본값):현재 사용자의 토큰으로만 신청할 수 있는 콘서트만 가져온다.
      * @return
      */
-    @GetMapping("/{token}")
-    public ResponseEntity<List<Object>> getConcertList(@PathVariable String token, @RequestParam(value = "false", required = false) boolean isALl){
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+    @GetMapping("/")
+    public ResponseEntity<List<ConcertEntity>> getConcertList(@RequestParam(value = "false", required = false) boolean isALl){
+
+
+        List<ConcertEntity> result = new ArrayList<>();
+
+        result.add(new ConcertEntity(1L, "콘서트1", 20000, 50, LocalDateTime.now(), LocalDateTime.now()));
+        result.add(new ConcertEntity(2L, "콘서트2", 10000, 50, LocalDateTime.now(), LocalDateTime.now()));
+        result.add(new ConcertEntity(3L, "콘서트3", 50000, 50, LocalDateTime.now(), LocalDateTime.now()));
+        result.add(new ConcertEntity(4L, "콘서트4", 90000, 50, LocalDateTime.now(), LocalDateTime.now()));
+        result.add(new ConcertEntity(5L, "콘서트5", 10000, 50, LocalDateTime.now(), LocalDateTime.now()));
+
+        // 해당 콘서트는 이미 만원인 데이터다.
+        if(isALl){
+            result.add(new ConcertEntity(6L, "콘서트6", 120000, 50, LocalDateTime.now(), LocalDateTime.now()));
+            result.add(new ConcertEntity(7L, "콘서트7", 100000, 50, LocalDateTime.now(), LocalDateTime.now()));
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /**
      * <h1>대기열 순번 출력</h1>
      *
-     * @param token 사용자 토큰
      * @return 대기열 순번
      */
-    @GetMapping("/turn/{token}")
-    public ResponseEntity<Long> getTurnNumber(@PathVariable String token){
+    @GetMapping("/turn")
+    public ResponseEntity<Long> getTurnNumber(){
         return new ResponseEntity<>(1L, HttpStatus.OK);
     }
 
@@ -47,11 +63,8 @@ public class ConcertController {
      *
      * @return
      */
-    @PutMapping("/{token}")
-    public ResponseEntity<Object> reserveConcert(
-            @PathVariable String token,
-            @RequestBody ConcertRequestDto concertRequestDto
-    ){
+    @PutMapping("")
+    public ResponseEntity<Object> reserveConcert(@RequestBody ConcertRequestDto concertRequestDto){
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 

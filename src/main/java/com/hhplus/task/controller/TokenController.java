@@ -33,7 +33,7 @@ public class TokenController {
     @GetMapping("/{userId}")
     public ResponseEntity<String> getToken(@PathVariable Long userId){
 
-        if(userId == null || userId < 0L) throw new CustomRuntimeException("");
+        if(userId == null || userId < 0L) throw new CustomRuntimeException("사용자 정보를 찾을 수 없습니다.");
 
         return new ResponseEntity<>(UUID.randomUUID().toString(), HttpStatus.OK);
     }
