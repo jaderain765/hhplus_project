@@ -1,4 +1,4 @@
-package com.hhplus.task.entity;
+package com.hhplus.task.domain.point.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;

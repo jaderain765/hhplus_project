@@ -1,6 +1,6 @@
-package com.hhplus.task.dto;
+package com.hhplus.task.api.point.dto;
 
-import com.hhplus.task.entity.PointStatus;
+import com.hhplus.task.domain.point.models.PointStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

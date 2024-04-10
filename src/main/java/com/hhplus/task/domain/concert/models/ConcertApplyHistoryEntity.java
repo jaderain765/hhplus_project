@@ -1,4 +1,4 @@
-package com.hhplus.task.entity;
+package com.hhplus.task.domain.concert.models;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,6 +1,6 @@
-package com.hhplus.task.controller;
+package com.hhplus.task.api.point.controller;
 
-import com.hhplus.task.dto.PointChangeDto;
+import com.hhplus.task.api.point.dto.PointChangeDto;
 import com.hhplus.task.exception.CustomRuntimeException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

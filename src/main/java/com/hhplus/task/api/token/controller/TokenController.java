@@ -1,4 +1,4 @@
-package com.hhplus.task.controller;
+package com.hhplus.task.api.token.controller;
 
 import com.hhplus.task.exception.CustomRuntimeException;
 import org.slf4j.Logger;

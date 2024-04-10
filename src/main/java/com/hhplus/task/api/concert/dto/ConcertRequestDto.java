@@ -1,4 +1,4 @@
-package com.hhplus.task.dto;
+package com.hhplus.task.api.concert.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
