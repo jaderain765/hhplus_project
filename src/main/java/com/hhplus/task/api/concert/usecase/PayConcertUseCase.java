@@ -11,15 +11,19 @@ import com.hhplus.task.domain.point.models.UserPoint;
 import com.hhplus.task.exception.CustomRuntimeException;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class PayConcertUseCase {
 
     private ConcertReader concertReader;
     private ConcertModifier concertModifier;
-
     private UserPointReader userPointReader;
-
     private UserPointModifier userPointModifier;
+
+    public PayConcertUseCase(ConcertReader concertReader, ConcertModifier concertModifier, UserPointReader userPointReader, UserPointModifier userPointModifier) {
+        this.concertReader = concertReader;
+        this.concertModifier = concertModifier;
+        this.userPointReader = userPointReader;
+        this.userPointModifier = userPointModifier;
+    }
 
     public ConcertApplyHistory execute(ConcertRequestDto concertRequestDto){
 

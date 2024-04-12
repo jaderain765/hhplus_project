@@ -6,10 +6,13 @@ import com.hhplus.task.domain.concert.component.ConcertModifier;
 import com.hhplus.task.domain.concert.models.ConcertApplyHistory;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class ReserveConcertUseCase {
 
     private ConcertModifier concertModifier;
+
+    public ReserveConcertUseCase(ConcertModifier concertModifier) {
+        this.concertModifier = concertModifier;
+    }
 
     public ConcertApplyHistory execute(ConcertRequestDto concertRequestDto){
 

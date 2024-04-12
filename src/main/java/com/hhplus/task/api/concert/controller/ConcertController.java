@@ -3,14 +3,18 @@ package com.hhplus.task.api.concert.controller;
 import com.hhplus.task.annotation.AccessTokenValue;
 import com.hhplus.task.annotation.CheckToken;
 import com.hhplus.task.api.concert.dto.ConcertRequestDto;
-import com.hhplus.task.api.concert.dto.response.PayConcertResponseDto;
-import com.hhplus.task.api.concert.dto.response.ReserveConcertResponseDto;
 import com.hhplus.task.api.concert.usecase.GetConcertListUseCase;
 import com.hhplus.task.api.concert.usecase.GetTurnNumberUseCase;
 import com.hhplus.task.api.concert.usecase.PayConcertUseCase;
 import com.hhplus.task.api.concert.usecase.ReserveConcertUseCase;
+import com.hhplus.task.domain.concert.component.ConcertModifier;
+import com.hhplus.task.domain.concert.component.ConcertReader;
 import com.hhplus.task.domain.concert.models.Concert;
 import com.hhplus.task.domain.concert.models.ConcertApplyHistory;
+import com.hhplus.task.domain.point.component.UserPointModifier;
+import com.hhplus.task.domain.point.component.UserPointReader;
+import com.hhplus.task.domain.token.component.TokenReader;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,11 +22,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/concert")
+@RequiredArgsConstructor
 public class ConcertController {
+
+    private ConcertReader concertReader;
+    private ConcertModifier concertModifier;
+    private TokenReader tokenReader;
+    private UserPointReader userPointReader;
+    private UserPointModifier userPointModifier;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -39,7 +49,7 @@ public class ConcertController {
     @CheckToken
     public ResponseEntity<List<Concert>> getConcertList(
             @RequestParam(value = "false", required = false) boolean isALl){
-        return new ResponseEntity<>(new GetConcertListUseCase().execute(),HttpStatus.OK);
+        return new ResponseEntity<>(new GetConcertListUseCase(concertReader).execute(),HttpStatus.OK);
     }
 
     /**
@@ -50,7 +60,7 @@ public class ConcertController {
     @GetMapping("/turn")
     @CheckToken
     public ResponseEntity<Long> getTurnNumber(@AccessTokenValue String token){
-        return new ResponseEntity<>(new GetTurnNumberUseCase().execute(token), HttpStatus.OK);
+        return new ResponseEntity<>(new GetTurnNumberUseCase(tokenReader).execute(token), HttpStatus.OK);
     }
 
     /**
@@ -61,7 +71,7 @@ public class ConcertController {
     @PutMapping("")
     @CheckToken
     public ResponseEntity<ConcertApplyHistory> reserveConcert(@RequestBody ConcertRequestDto concertRequestDto){
-        return new ResponseEntity<>(new ReserveConcertUseCase().execute(concertRequestDto), HttpStatus.OK);
+        return new ResponseEntity<>(new ReserveConcertUseCase(concertModifier).execute(concertRequestDto), HttpStatus.OK);
     }
 
     /**
@@ -71,6 +81,7 @@ public class ConcertController {
      */
     @PostMapping("")
     public ResponseEntity<ConcertApplyHistory> payConcert(@RequestBody ConcertRequestDto concertRequestDto){
-        return new ResponseEntity<>(new PayConcertUseCase().execute(concertRequestDto), HttpStatus.OK);
+        return new ResponseEntity<>(new PayConcertUseCase(concertReader, concertModifier, userPointReader, userPointModifier)
+                .execute(concertRequestDto), HttpStatus.OK);
     }
 }

@@ -8,4 +8,6 @@ public interface TokenStoreRepository {
     public Long expiredTokenDelete();
 
     public Long tokenGiveAuthority(List<String> tokenList);
+
+    String createToken(Long userId);
 }

@@ -1,5 +1,6 @@
 package com.hhplus.task.api.token.controller;
 
+import com.hhplus.task.api.token.usecase.GetTokenUseCase;
 import com.hhplus.task.exception.CustomRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,6 @@ public class TokenController {
 
         if(userId == null || userId < 0L) throw new CustomRuntimeException("사용자 정보를 찾을 수 없습니다.");
 
-        return new ResponseEntity<>(UUID.randomUUID().toString(), HttpStatus.OK);
+        return new ResponseEntity<>(new GetTokenUseCase().execute(userId), HttpStatus.OK);
     }
 }

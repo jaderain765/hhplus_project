@@ -11,6 +11,10 @@ public class TokenModifier {
 
     private TokenStoreRepository tokenStoreRepository;
 
+    public String createToken(Long userId){
+        return tokenStoreRepository.createToken(userId);
+    }
+
     /**
      * 토큰 삭제
      *
