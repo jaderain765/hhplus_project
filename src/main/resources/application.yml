@@ -6,3 +6,13 @@ spring:
   application:
     name:
       task
+# api doc
+
+springdoc:
+  api-docs:
+    enabled:
+      true
+    path:
+      /api-docs
+  paths-to-match:
+    /api/v1/**

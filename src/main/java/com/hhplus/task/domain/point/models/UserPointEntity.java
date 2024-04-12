@@ -5,6 +5,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,8 @@ public class UserPointEntity {
     @Id
     private Long userId;
     private Long point;
+
+    @LastModifiedDate
     private LocalDateTime updateTime;
 
     @Builder
@@ -27,5 +30,19 @@ public class UserPointEntity {
         this.userId = userId;
         this.point = point;
         this.updateTime = updateTime;
+    }
+
+    public UserPointEntity(UserPoint userPoint) {
+        this.userId = userPoint.getUserId();
+        this.point = userPoint.getPoint();
+        this.updateTime = userPoint.getUpdateTime();
+    }
+
+    public UserPoint toUserPoint(){
+        return UserPoint.builder()
+                .userId(this.userId)
+                .point(this.point)
+                .updateTime(this.updateTime)
+                .build();
     }
 }

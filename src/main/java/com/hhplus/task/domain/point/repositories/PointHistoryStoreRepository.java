@@ -1,4 +1,6 @@
 package com.hhplus.task.domain.point.repositories;
 
-public interface PointHistoryRepository {
+public interface PointHistoryStoreRepository {
+
+
 }

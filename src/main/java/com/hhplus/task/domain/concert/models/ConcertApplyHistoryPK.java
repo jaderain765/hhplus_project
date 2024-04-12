@@ -7,11 +7,16 @@ import java.io.Serializable;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class ConcertApplyHistoryPK implements Serializable {
 
     private Integer seatNumber;
     private Long concertId;
+
+    @Builder
+    public ConcertApplyHistoryPK(Integer seatNumber, Long concertId) {
+        this.seatNumber = seatNumber;
+        this.concertId = concertId;
+    }
 }

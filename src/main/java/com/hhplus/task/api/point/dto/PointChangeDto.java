@@ -1,15 +1,19 @@
 package com.hhplus.task.api.point.dto;
 
 import com.hhplus.task.domain.point.models.PointStatus;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode
 @ToString
 public class PointChangeDto {
     private Long userId;
     private Long amount;
-    private PointStatus pointStatus;
+
+    @Builder
+    public PointChangeDto(Long userId, Long amount) {
+        this.userId = userId;
+        this.amount = amount;
+    }
 }

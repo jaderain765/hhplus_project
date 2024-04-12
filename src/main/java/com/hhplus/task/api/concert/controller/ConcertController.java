@@ -1,8 +1,16 @@
 package com.hhplus.task.api.concert.controller;
 
+import com.hhplus.task.annotation.AccessTokenValue;
+import com.hhplus.task.annotation.CheckToken;
 import com.hhplus.task.api.concert.dto.ConcertRequestDto;
+import com.hhplus.task.api.concert.dto.response.PayConcertResponseDto;
+import com.hhplus.task.api.concert.dto.response.ReserveConcertResponseDto;
 import com.hhplus.task.api.concert.usecase.GetConcertListUseCase;
+import com.hhplus.task.api.concert.usecase.GetTurnNumberUseCase;
+import com.hhplus.task.api.concert.usecase.PayConcertUseCase;
+import com.hhplus.task.api.concert.usecase.ReserveConcertUseCase;
 import com.hhplus.task.domain.concert.models.Concert;
+import com.hhplus.task.domain.concert.models.ConcertApplyHistory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -28,29 +36,10 @@ public class ConcertController {
      * @return
      */
     @GetMapping("/")
+    @CheckToken
     public ResponseEntity<List<Concert>> getConcertList(
-            @RequestParam(value = "false", required = false) boolean isALl,
-            @RequestHeader Map<String, String> headers){
-
-//        if(headers.get("token") == null) throw new CustomRuntimeException("대기열 정보가 존재하지 않습니다.");
-//
-//        List<ConcertEntity> result = new ArrayList<>();
-//
-//        result.add(new ConcertEntity(1L, "콘서트1", 20000, 50, LocalDateTime.now(), LocalDateTime.now()));
-//        result.add(new ConcertEntity(2L, "콘서트2", 10000, 50, LocalDateTime.now(), LocalDateTime.now()));
-//        result.add(new ConcertEntity(3L, "콘서트3", 50000, 50, LocalDateTime.now(), LocalDateTime.now()));
-//        result.add(new ConcertEntity(4L, "콘서트4", 90000, 50, LocalDateTime.now(), LocalDateTime.now()));
-//        result.add(new ConcertEntity(5L, "콘서트5", 10000, 50, LocalDateTime.now(), LocalDateTime.now()));
-//
-//        // 해당 콘서트는 이미 만원인 데이터다.
-//        if(isALl){
-//            result.add(new ConcertEntity(6L, "콘서트6", 120000, 50, LocalDateTime.now(), LocalDateTime.now()));
-//            result.add(new ConcertEntity(7L, "콘서트7", 100000, 50, LocalDateTime.now(), LocalDateTime.now()));
-//        }
-//
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-
-        return new ResponseEntity<>(GetConcertListUseCase.execute(), HttpStatus.OK);
+            @RequestParam(value = "false", required = false) boolean isALl){
+        return new ResponseEntity<>(new GetConcertListUseCase().execute(),HttpStatus.OK);
     }
 
     /**
@@ -59,8 +48,9 @@ public class ConcertController {
      * @return 대기열 순번
      */
     @GetMapping("/turn")
-    public ResponseEntity<Long> getTurnNumber(){
-        return new ResponseEntity<>(1L, HttpStatus.OK);
+    @CheckToken
+    public ResponseEntity<Long> getTurnNumber(@AccessTokenValue String token){
+        return new ResponseEntity<>(new GetTurnNumberUseCase().execute(token), HttpStatus.OK);
     }
 
     /**
@@ -69,8 +59,9 @@ public class ConcertController {
      * @return
      */
     @PutMapping("")
-    public ResponseEntity<Object> reserveConcert(@RequestBody ConcertRequestDto concertRequestDto){
-        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    @CheckToken
+    public ResponseEntity<ConcertApplyHistory> reserveConcert(@RequestBody ConcertRequestDto concertRequestDto){
+        return new ResponseEntity<>(new ReserveConcertUseCase().execute(concertRequestDto), HttpStatus.OK);
     }
 
     /**
@@ -79,8 +70,7 @@ public class ConcertController {
      * @return
      */
     @PostMapping("")
-    public ResponseEntity<Object> payConcert(@RequestBody ConcertRequestDto concertRequestDto){
-        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    public ResponseEntity<ConcertApplyHistory> payConcert(@RequestBody ConcertRequestDto concertRequestDto){
+        return new ResponseEntity<>(new PayConcertUseCase().execute(concertRequestDto), HttpStatus.OK);
     }
-
 }
