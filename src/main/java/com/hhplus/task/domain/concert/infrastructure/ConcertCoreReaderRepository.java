@@ -1,11 +1,8 @@
 package com.hhplus.task.domain.concert.infrastructure;
 
 import com.hhplus.task.domain.concert.models.Concert;
-import com.hhplus.task.domain.concert.models.ConcertApplyHistory;
 import com.hhplus.task.domain.concert.models.ConcertEntity;
 import com.hhplus.task.domain.concert.repositories.ConcertReaderRepository;
-import com.hhplus.task.domain.point.infrastructure.PointHistoryQuerydslRepository;
-import com.hhplus.task.exception.CustomRuntimeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -25,9 +22,7 @@ public class ConcertCoreReaderRepository implements ConcertReaderRepository {
     public Concert findById(Long id) {
         Optional<ConcertEntity> concertEntity = concertJpaRepository.findById(id);
 
-        if(concertEntity.isPresent()) return concertEntity.get().toConcert();
-
-        throw new CustomRuntimeException("콘서트 정보를 찾을 수 없습니다.");
+        return concertEntity.isPresent() ? concertEntity.get().toConcert() : null;
     }
 
     @Override

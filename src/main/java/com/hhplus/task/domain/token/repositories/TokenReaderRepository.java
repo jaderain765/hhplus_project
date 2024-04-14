@@ -10,8 +10,8 @@ public interface TokenReaderRepository {
 
     Long findTurnNumberByToken(String token);
 
-    public Long authorityTokenCount();
+    Long authorityTokenCount();
 
-    public List<String> findGiveAuthorityList(long limit);
+    List<String> findGiveAuthorityList(long limit);
 
 }

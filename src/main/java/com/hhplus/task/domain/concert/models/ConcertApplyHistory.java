@@ -1,8 +1,6 @@
 package com.hhplus.task.domain.concert.models;
 
-import jakarta.persistence.Id;
 import lombok.*;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 

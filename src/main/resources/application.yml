@@ -16,3 +16,14 @@ spring:
 #      /api-docs
 #  paths-to-match:
 #    /api/v1/**
+
+
+#springdoc:
+#  packages-to-scan:kr.shlee
+#  default-consumes-media-type:application/json;charset=UTF-8
+#  default-produces-media-type:application/json;charset=UTF-8
+#
+#  swagger-ui.path:/swagger-ui.html
+#  swagger-ui.disable-swagger-default-url:true
+#  swagger-ui.display-request-duration:true
+#  swagger-ui.operations-sorter:alpha

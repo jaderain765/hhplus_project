@@ -7,13 +7,8 @@ import com.hhplus.task.api.concert.usecase.GetConcertListUseCase;
 import com.hhplus.task.api.concert.usecase.GetTurnNumberUseCase;
 import com.hhplus.task.api.concert.usecase.PayConcertUseCase;
 import com.hhplus.task.api.concert.usecase.ReserveConcertUseCase;
-import com.hhplus.task.domain.concert.component.ConcertModifier;
-import com.hhplus.task.domain.concert.component.ConcertReader;
 import com.hhplus.task.domain.concert.models.Concert;
 import com.hhplus.task.domain.concert.models.ConcertApplyHistory;
-import com.hhplus.task.domain.point.component.UserPointModifier;
-import com.hhplus.task.domain.point.component.UserPointReader;
-import com.hhplus.task.domain.token.component.TokenReader;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,11 +23,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ConcertController {
 
-    private ConcertReader concertReader;
-    private ConcertModifier concertModifier;
-    private TokenReader tokenReader;
-    private UserPointReader userPointReader;
-    private UserPointModifier userPointModifier;
+    private GetConcertListUseCase getConcertListUseCase;
+    private GetTurnNumberUseCase getTurnNumberUseCase;
+    private ReserveConcertUseCase reserveConcertUseCase;
+    private PayConcertUseCase payConcertUseCase;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -42,14 +36,14 @@ public class ConcertController {
      *
      * 현재 있는 콘서트 목록을 볼 수 있다.
      *
-     * @param isALl true:모든 콘서트 목록을 가져온다. false(기본값):현재 사용자의 토큰으로만 신청할 수 있는 콘서트만 가져온다.
+     * @param isAll true:모든 콘서트 목록을 가져온다. false(기본값):현재 사용자의 토큰으로만 신청할 수 있는 콘서트만 가져온다.
      * @return
      */
     @GetMapping("/")
     @CheckToken
     public ResponseEntity<List<Concert>> getConcertList(
-            @RequestParam(value = "false", required = false) boolean isALl){
-        return new ResponseEntity<>(new GetConcertListUseCase(concertReader).execute(),HttpStatus.OK);
+            @RequestParam(value = "false", required = false) boolean isAll){
+        return new ResponseEntity<>(getConcertListUseCase.execute(isAll),HttpStatus.OK);
     }
 
     /**
@@ -60,7 +54,7 @@ public class ConcertController {
     @GetMapping("/turn")
     @CheckToken
     public ResponseEntity<Long> getTurnNumber(@AccessTokenValue String token){
-        return new ResponseEntity<>(new GetTurnNumberUseCase(tokenReader).execute(token), HttpStatus.OK);
+        return new ResponseEntity<>(getTurnNumberUseCase.execute(token), HttpStatus.OK);
     }
 
     /**
@@ -71,7 +65,7 @@ public class ConcertController {
     @PutMapping("")
     @CheckToken
     public ResponseEntity<ConcertApplyHistory> reserveConcert(@RequestBody ConcertRequestDto concertRequestDto){
-        return new ResponseEntity<>(new ReserveConcertUseCase(concertModifier).execute(concertRequestDto), HttpStatus.OK);
+        return new ResponseEntity<>(reserveConcertUseCase.execute(concertRequestDto), HttpStatus.OK);
     }
 
     /**
@@ -81,7 +75,6 @@ public class ConcertController {
      */
     @PostMapping("")
     public ResponseEntity<ConcertApplyHistory> payConcert(@RequestBody ConcertRequestDto concertRequestDto){
-        return new ResponseEntity<>(new PayConcertUseCase(concertReader, concertModifier, userPointReader, userPointModifier)
-                .execute(concertRequestDto), HttpStatus.OK);
+        return new ResponseEntity<>(payConcertUseCase.execute(concertRequestDto), HttpStatus.OK);
     }
 }

@@ -1,6 +1,5 @@
 package com.hhplus.task.api.point.dto;
 
-import com.hhplus.task.domain.point.models.PointStatus;
 import lombok.*;
 
 @Getter

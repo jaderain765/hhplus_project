@@ -2,17 +2,18 @@ package com.hhplus.task.api.concert.usecase;
 
 import com.hhplus.task.domain.concert.component.ConcertReader;
 import com.hhplus.task.domain.concert.models.Concert;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@RequiredArgsConstructor
+@Component
 public class GetConcertListUseCase {
-    private ConcertReader concertReader;
 
-    public GetConcertListUseCase(ConcertReader concertReader) {
-        this.concertReader = concertReader;
-    }
+    private final ConcertReader concertReader;
 
-    public List<Concert> execute(){
-        return concertReader.findAll();
+    public List<Concert> execute(boolean isAll){
+        return isAll ? concertReader.findAll() : concertReader.findAllAvailable();
     }
 }

@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/point")
 public class PointController {
 
+    private GetPointUseCase getPointUseCase;
+    private ChangePointUseCase changePointUseCase;
+
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @GetMapping("/{userId}")
     public ResponseEntity<Long> getPoint(@PathVariable Long userId){
-        return new ResponseEntity<>(new GetPointUseCase().execute(userId), HttpStatus.OK);
+        return new ResponseEntity<>(getPointUseCase.execute(userId), HttpStatus.OK);
     }
 
     @PostMapping("/charge")
     public ResponseEntity<Long> chargePoint(@RequestBody PointChangeDto pointChangeDto){
-        return new ResponseEntity<>(new ChangePointUseCase().execute(pointChangeDto), HttpStatus.OK);
+        return new ResponseEntity<>(changePointUseCase.execute(pointChangeDto), HttpStatus.OK);
     }
 }

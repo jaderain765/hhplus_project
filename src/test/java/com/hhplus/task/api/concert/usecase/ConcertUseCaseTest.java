@@ -1,20 +1,27 @@
 package com.hhplus.task.api.concert.usecase;
 
+import com.hhplus.task.domain.concert.component.ConcertReader;
+import com.hhplus.task.stub.ConcertReaderRepositoryStub;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-//@Import(TestConfig.class)
 class ConcertUseCaseTest {
+
+    private final GetConcertListUseCase getConcertListUseCase;
+
+    ConcertUseCaseTest() {
+        this.getConcertListUseCase = new GetConcertListUseCase(new ConcertReader(new ConcertReaderRepositoryStub()));
+    }
 
     @Test
     @DisplayName("콘서트_리스트를_가져오는_UseCase")
     void getConcertListUseCase() {
         // given
 
-
         // when
+        getConcertListUseCase.execute(false);
 
         // then
 

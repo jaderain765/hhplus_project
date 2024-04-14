@@ -1,6 +1,5 @@
 package com.hhplus.task.domain.token.component;
 
-import com.hhplus.task.domain.token.infrastructure.TokenJpaRepository;
 import com.hhplus.task.domain.token.repositories.TokenStoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

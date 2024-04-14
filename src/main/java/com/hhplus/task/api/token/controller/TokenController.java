@@ -1,7 +1,7 @@
 package com.hhplus.task.api.token.controller;
 
 import com.hhplus.task.api.token.usecase.GetTokenUseCase;
-import com.hhplus.task.exception.CustomRuntimeException;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
 /**
  * <h1>Token 컨트롤러</h1>
  * <hr/>
@@ -20,8 +18,11 @@ import java.util.UUID;
  * 해당 토큰을 기준으로 Concert의 대기열 로직을 실행한다.
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/token")
 public class TokenController {
+
+    private GetTokenUseCase getTokenUseCase;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -33,9 +34,6 @@ public class TokenController {
      */
     @GetMapping("/{userId}")
     public ResponseEntity<String> getToken(@PathVariable Long userId){
-
-        if(userId == null || userId < 0L) throw new CustomRuntimeException("사용자 정보를 찾을 수 없습니다.");
-
-        return new ResponseEntity<>(new GetTokenUseCase().execute(userId), HttpStatus.OK);
+        return new ResponseEntity<>(getTokenUseCase.execute(userId), HttpStatus.OK);
     }
 }

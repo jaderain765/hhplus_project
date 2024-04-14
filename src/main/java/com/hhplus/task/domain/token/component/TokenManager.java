@@ -2,14 +2,12 @@ package com.hhplus.task.domain.token.component;
 
 import com.hhplus.task.domain.token.repositories.TokenReaderRepository;
 import com.hhplus.task.domain.token.repositories.TokenStoreRepository;
-import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor

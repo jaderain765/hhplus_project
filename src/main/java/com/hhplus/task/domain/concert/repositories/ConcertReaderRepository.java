@@ -1,10 +1,8 @@
 package com.hhplus.task.domain.concert.repositories;
 
 import com.hhplus.task.domain.concert.models.Concert;
-import com.hhplus.task.domain.concert.models.ConcertApplyHistory;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ConcertReaderRepository {
 

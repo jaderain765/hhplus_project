@@ -24,9 +24,7 @@ public class ConcertRequestDto {
         if(concertId == null || concertId < 1)
             throw new CustomRuntimeException("콘서트 정보를 찾을 수 없습니다.");
 
-        int capacity = new ConcertReader().findCapacityById(concertId);
-
-        if(seatNumber == null || seatNumber < 1 || seatNumber > capacity)
+        if(seatNumber == null || seatNumber < 1)
             throw new CustomRuntimeException("요청하신 좌석 정보가 잘못되었습니다.");
 
         if(userId == null || userId < 1L)

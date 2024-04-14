@@ -1,6 +1,5 @@
 package com.hhplus.task.domain.concert.models;
 
-import jakarta.persistence.Id;
 import lombok.*;
 
 import java.io.Serializable;
