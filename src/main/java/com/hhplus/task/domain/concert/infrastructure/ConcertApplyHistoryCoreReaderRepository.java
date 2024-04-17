@@ -19,9 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ConcertApplyHistoryCoreReaderRepository implements ConcertApplyHistoryReaderRepository {
 
-    private ConcertApplyHistoryJpaRepository concertApplyHistoryJpaRepository;
-
-    private ConcertApplyHistoryQuerydslRepository concertApplyHistoryQuerydslRepository;
+    private final ConcertApplyHistoryJpaRepository concertApplyHistoryJpaRepository;
 
     JPAQueryFactory jpaQueryFactory;
 

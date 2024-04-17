@@ -23,10 +23,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ConcertController {
 
-    private GetConcertListUseCase getConcertListUseCase;
-    private GetTurnNumberUseCase getTurnNumberUseCase;
-    private ReserveConcertUseCase reserveConcertUseCase;
-    private PayConcertUseCase payConcertUseCase;
+    private final GetConcertListUseCase getConcertListUseCase;
+    private final GetTurnNumberUseCase getTurnNumberUseCase;
+    private final ReserveConcertUseCase reserveConcertUseCase;
+    private final PayConcertUseCase payConcertUseCase;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 

@@ -3,12 +3,16 @@ package com.hhplus.task.domain.concert.infrastructure;
 import com.hhplus.task.domain.concert.models.QConcertApplyHistoryEntity;
 import com.hhplus.task.domain.concert.models.QConcertEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@RequiredArgsConstructor
 public class ConcertQureydslRepository{
 
-    JPAQueryFactory jpaQueryFactory;
+    private final JPAQueryFactory jpaQueryFactory;
 
-    QConcertEntity concert = QConcertEntity.concertEntity;
-    QConcertApplyHistoryEntity  history = QConcertApplyHistoryEntity.concertApplyHistoryEntity;
+    private QConcertEntity concert = QConcertEntity.concertEntity;
+    private QConcertApplyHistoryEntity  history = QConcertApplyHistoryEntity.concertApplyHistoryEntity;
 
 }

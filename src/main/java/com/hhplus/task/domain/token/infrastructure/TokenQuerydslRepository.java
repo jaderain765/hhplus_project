@@ -13,7 +13,7 @@ public class TokenQuerydslRepository {
 
 
 
-    private JPAQueryFactory jpaQueryFactory;
+    private final JPAQueryFactory jpaQueryFactory;
 
     QTokenEntity token = QTokenEntity.tokenEntity;
 

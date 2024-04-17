@@ -17,8 +17,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @RequiredArgsConstructor
 public class CheckTokenAspect {
 
-    private TokenReader tokenReader;
-    private TokenModifier tokenModifier;
+    private final TokenReader tokenReader;
+    private final TokenModifier tokenModifier;
 
     @Before("@annotation(com.hhplus.task.annotation.CheckToken)")
     public void checkToken(JoinPoint joinPoint){

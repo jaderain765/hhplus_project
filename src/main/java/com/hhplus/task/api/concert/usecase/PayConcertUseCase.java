@@ -16,17 +16,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class PayConcertUseCase {
 
-    private ConcertReader concertReader;
-    private ConcertModifier concertModifier;
-    private UserPointReader userPointReader;
-    private UserPointModifier userPointModifier;
-
-    public PayConcertUseCase(ConcertReader concertReader, ConcertModifier concertModifier, UserPointReader userPointReader, UserPointModifier userPointModifier) {
-        this.concertReader = concertReader;
-        this.concertModifier = concertModifier;
-        this.userPointReader = userPointReader;
-        this.userPointModifier = userPointModifier;
-    }
+    private final ConcertReader concertReader;
+    private final ConcertModifier concertModifier;
+    private final UserPointReader userPointReader;
+    private final UserPointModifier userPointModifier;
 
     public ConcertApplyHistory execute(ConcertRequestDto concertRequestDto){
 

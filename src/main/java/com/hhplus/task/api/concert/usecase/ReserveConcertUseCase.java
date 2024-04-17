@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReserveConcertUseCase {
 
-    private ConcertModifier concertModifier;
+    private final ConcertModifier concertModifier;
 
     public ConcertApplyHistory execute(ConcertRequestDto concertRequestDto){
 

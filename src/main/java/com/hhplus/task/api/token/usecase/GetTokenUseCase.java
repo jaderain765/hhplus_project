@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetTokenUseCase {
 
-    TokenModifier tokenModifier;
+    private final TokenModifier tokenModifier;
 
     public String execute(Long userId) {
         if(userId == null || userId < 0L) throw new CustomRuntimeException("사용자 정보를 찾을 수 없습니다.");

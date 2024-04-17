@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class GetTurnNumberUseCase {
-    private TokenReader tokenReader;
+    private final TokenReader tokenReader;
 
     public Long execute(String token){
         return tokenReader.getTurnNumber(token);

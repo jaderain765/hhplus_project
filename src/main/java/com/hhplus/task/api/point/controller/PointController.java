@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/point")
 public class PointController {
 
-    private GetPointUseCase getPointUseCase;
-    private ChangePointUseCase changePointUseCase;
+    private final GetPointUseCase getPointUseCase;
+    private final ChangePointUseCase changePointUseCase;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 

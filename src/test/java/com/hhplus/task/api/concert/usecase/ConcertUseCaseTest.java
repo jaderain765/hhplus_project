@@ -11,8 +11,12 @@ class ConcertUseCaseTest {
 
     private final GetConcertListUseCase getConcertListUseCase;
 
-    ConcertUseCaseTest() {
-        this.getConcertListUseCase = new GetConcertListUseCase(new ConcertReader(new ConcertReaderRepositoryStub()));
+    public ConcertUseCaseTest() {
+        ConcertReaderRepositoryStub concertReaderRepository = new ConcertReaderRepositoryStub();
+
+        ConcertReader concertReader = new ConcertReader(concertReaderRepository);
+
+        this.getConcertListUseCase = new GetConcertListUseCase(concertReader);
     }
 
     @Test

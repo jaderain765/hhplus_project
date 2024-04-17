@@ -15,8 +15,8 @@ import java.util.Optional;
 @Repository
 public class ConcertCoreReaderRepository implements ConcertReaderRepository {
 
-    private ConcertJpaRepository concertJpaRepository;
-    private ConcertApplyHistoryQuerydslRepository concertApplyHistoryQuerydslRepository;
+    private final ConcertJpaRepository concertJpaRepository;
+    private final ConcertApplyHistoryQuerydslRepository concertApplyHistoryQuerydslRepository;
 
     @Override
     public Concert findById(Long id) {

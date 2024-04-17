@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetPointUseCase {
 
-    private UserPointReader userPointReader;
+    private final UserPointReader userPointReader;
 
     public Long execute(Long userId){
 

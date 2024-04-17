@@ -17,11 +17,8 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ConcertModifier {
 
-    private ConcertReaderRepository concertReaderRepository;
-    private ConcertStoreRepository concertStoreRepository;
-
-    private ConcertApplyHistoryReaderRepository concertApplyHistoryReaderRepository;
-    private ConcertApplyHistoryModifierRepository concertApplyHistoryModifierRepository;
+    private final ConcertApplyHistoryReaderRepository concertApplyHistoryReaderRepository;
+    private final ConcertApplyHistoryModifierRepository concertApplyHistoryModifierRepository;
 
     /**
      * 콘서트 예약

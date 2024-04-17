@@ -4,11 +4,13 @@ import com.hhplus.task.api.point.dto.PointChangeDto;
 import com.hhplus.task.domain.point.component.UserPointModifier;
 import com.hhplus.task.exception.CustomRuntimeException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
+@Component
 public class ChangePointUseCase {
 
-    private UserPointModifier userPointModifier;
+    private final UserPointModifier userPointModifier;
 
     public Long execute(PointChangeDto pointChangeDto) {
         if(pointChangeDto.getUserId() == null || pointChangeDto.getUserId() < 0L)

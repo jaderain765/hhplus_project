@@ -1,5 +1,4 @@
 package com.hhplus.task.domain.concert.infrastructure;
-
 import com.hhplus.task.domain.concert.models.QConcertApplyHistoryEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ConcertApplyHistoryQuerydslRepository {
 
-    JPAQueryFactory jpaQueryFactory;
+    private final JPAQueryFactory jpaQueryFactory;
 
     QConcertApplyHistoryEntity concertApplyHistory = QConcertApplyHistoryEntity.concertApplyHistoryEntity;
 

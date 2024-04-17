@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/token")
 public class TokenController {
 
-    private GetTokenUseCase getTokenUseCase;
+    private final GetTokenUseCase getTokenUseCase;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
