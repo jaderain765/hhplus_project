@@ -26,9 +26,13 @@ public class ConcertApplyHistoryCoreReaderRepository implements ConcertApplyHist
     QConcertApplyHistoryEntity applyHistory = QConcertApplyHistoryEntity.concertApplyHistoryEntity;
 
     @Override
-    public List<ConcertApplyHistoryEntity> findAllByConcertId(long concertId) {
+    public List<ConcertApplyHistory> findAllByConcertId(long concertId) {
 
-        return concertApplyHistoryJpaRepository.findAllByConcertId(concertId);
+        return concertApplyHistoryJpaRepository
+                .findAllByConcertId(concertId)
+                .stream()
+                .map(e -> e.toConcertApplyHistory())
+                .toList();
     }
 
     @Override

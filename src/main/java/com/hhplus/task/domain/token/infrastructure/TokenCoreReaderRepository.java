@@ -3,9 +3,11 @@ package com.hhplus.task.domain.token.infrastructure;
 import com.hhplus.task.domain.token.models.Token;
 import com.hhplus.task.domain.token.models.TokenEntity;
 import com.hhplus.task.domain.token.repositories.TokenReaderRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class TokenCoreReaderRepository implements TokenReaderRepository {
 
     TokenQuerydslRepository tokenQuerydslRepository;

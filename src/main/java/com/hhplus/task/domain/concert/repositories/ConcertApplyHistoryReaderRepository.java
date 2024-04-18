@@ -7,7 +7,7 @@ import com.hhplus.task.domain.concert.models.ConcertApplyHistoryPK;
 import java.util.List;
 
 public interface ConcertApplyHistoryReaderRepository {
-    List<ConcertApplyHistoryEntity> findAllByConcertId(long concertId);
+    List<ConcertApplyHistory> findAllByConcertId(long concertId);
 
     Long countByConcertId(long concertId);
 

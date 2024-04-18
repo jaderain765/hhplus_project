@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class TokenReader {
 
-    private TokenReaderRepository readerRepository;
+    private final TokenReaderRepository readerRepository;
 
     public boolean isUseable(String token){
 
