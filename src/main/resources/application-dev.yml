@@ -28,5 +28,5 @@ spring:
 
 logging:
   level:
-    '[shop.mtcoding.bank]': DEBUG
+    '[com.hhplus.task]': DEBUG
     '[org.hibernate.type]': TRACE
